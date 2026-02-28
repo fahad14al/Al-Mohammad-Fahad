@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Blog - Al Mohammad Fahad{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5 fade-in-up">
+            <h2 class="display-4 fw-bold"><span class="text-gradient">Blog</span> & Articles</h2>
+            <p class="lead text-muted mt-2">Thoughts on Django, Data, and Development.</p>
+            <div class="mx-auto mt-3 rounded" style="width: 60px; height: 4px; background: var(--primary-gradient);"></div>
+        </div>
+
+        {% if not posts %}
+            <div class="text-center mt-5 fade-in-up delay-100">
+                <i class="bi bi-journal-text display-1 text-muted opacity-25 mb-4 d-block"></i>
+                <h3 class="fw-light text-muted">No blog posts yet!</h3>
+                <p class="text-secondary">Check back soon for articles and tutorials.</p>
+            </div>
+        {% else %}
+            <div class="row g-5">
+                <div class="col-lg-8 mx-auto">
+                    {% for post in posts %}
+                        <article class="glass-card mb-5 p-4 p-md-5 overflow-hidden fade-in-up delay-{{ forloop.counter|divisibleby:3|yesno:'200,100,0' }}">
+                            <div class="d-flex align-items-center mb-3">
+                                <span class="badge bg-primary bg-opacity-25 text-primary border border-primary px-3 py-2 rounded-pill shadow-sm">
+                                    <i class="bi bi-calendar3 me-2"></i>{{ post.created_at|date:"F d, Y" }}
+                                </span>
+                            </div>
+                            
+                            <h3 class="display-6 fw-bold mb-4">{{ post.title }}</h3>
+                            
+                            <div class="text-secondary lh-lg mb-4" style="text-align: justify;">
+                                {{ post.content|linebreaks }}
+                            </div>
+                            
+                            <div class="d-flex align-items-center mt-4 pt-4 border-top border-secondary border-opacity-25">
+                                <div class="bg-secondary bg-opacity-50 rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                    <i class="bi bi-person text-white"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <p class="mb-0 fw-bold small">Al Mohammad Fahad</p>
+                                    <small class="text-muted">Author</small>
+                                </div>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="py-5 d-flex align-items-center min-vh-75 mt-4">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 order-2 order-lg-1 mt-5 mt-lg-0 fade-in-up">
+                <span class="text-gradient fw-bold fs-5 text-uppercase tracking-wider">Hello, World!</span>
+                <h1 class="display-3 fw-bold mt-2 mb-3">I'm Al Mohammad <br><span class="text-gradient">Fahad</span></h1>
+                
+                <h2 class="h3 fw-light text-muted mb-4 d-flex align-items-center">
+                    <i class="bi bi-chevron-right text-gradient me-2"></i>
+                    <span id="typed-text">Python Developer | Django Developer | Machine Learning Enthusiast</span>
+                    <span class="typing-cursor"></span>
+                </h2>
+
+                <p class="lead text-secondary mb-5 pe-lg-5" style="max-width: 600px;">
+                    Passionate software developer from Bangladesh specializing in backend architecture with Django and data-driven intelligence through Machine Learning.
+                </p>
+                <div class="d-flex gap-3">
+                    <a href="{% url 'projects' %}" class="btn btn-gradient px-4 py-2 fs-5">
+                        <i class="bi bi-code-slash me-2"></i>View Projects
+                    </a>
+                    <a href="{% url 'contact' %}" class="btn btn-outline-custom px-4 py-2 fs-5">
+                        <i class="bi bi-chat-dots me-2"></i>Contact Me
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 order-1 order-lg-2 text-center fade-in-up delay-100">
+                <div class="position-relative d-inline-block">
+                    <!-- Decorational background circle -->
+                    <div class="position-absolute top-50 start-50 translate-middle rounded-circle" 
+                         style="width: 320px; height: 320px; background: var(--primary-gradient); filter: blur(50px); opacity: 0.3; z-index: -1;"></div>
+                    
+                    <div class="glass-card p-2 rounded-circle overflow-hidden shadow-lg border-2 border-primary" style="width: 280px; height: 280px; margin: 0 auto; background: var(--card-bg);">
+                        <img src="{% static 'images/placeholder-profile.png' %}" alt="Al Mohammad Fahad" class="w-100 h-100 object-fit-cover rounded-circle bg-secondary">
+                        <!-- We can replace this with an actual image user can upload, using static for now -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section class="py-5 bg-gradient-to-bottom">
+    <div class="container">
+        <div class="text-center mb-5 fade-in-up">
+            <h2 class="display-5 fw-bold"><span class="text-gradient">Core</span> Skills</h2>
+            <div class="mx-auto mt-2 rounded" style="width: 60px; height: 4px; background: var(--primary-gradient);"></div>
+        </div>
+
+        <div class="row g-4">
+            <!-- Backend -->
+            <div class="col-md-6 col-lg-4 fade-in-up">
+                <div class="glass-card p-4 h-100">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-primary bg-opacity-10 text-primary p-3 rounded-circle me-3 fs-3">
+                            <i class="bi bi-hdd-network"></i>
+                        </div>
+                        <h3 class="h4 mb-0 fw-bold">Backend</h3>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="small fw-semibold">Python</span>
+                            <span class="small text-muted">90%</span>
+                        </div>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="small fw-semibold">Django & REST APIs</span>
+                            <span class="small text-muted">85%</span>
+                        </div>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="mb-0">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="small fw-semibold">SQL / PostgreSQL</span>
+                            <span class="small text-muted">80%</span>
+                        </div>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Frontend -->
+            <div class="col-md-6 col-lg-4 fade-in-up delay-100">
+                <div class="glass-card p-4 h-100">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-success bg-opacity-10 text-success p-3 rounded-circle me-3 fs-3">
+                            <i class="bi bi-window-fullscreen"></i>
+                        </div>
+                        <h3 class="h4 mb-0 fw-bold">Frontend</h3>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="small fw-semibold">HTML, CSS, Bootstrap</span>
+                            <span class="small text-muted">85%</span>
+                        </div>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="mb-0">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="small fw-semibold">JavaScript</span>
+                            <span class="small text-muted">75%</span>
+                        </div>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data & Tools -->
+            <div class="col-md-6 col-lg-4 fade-in-up delay-200">
+                <div class="glass-card p-4 h-100">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-warning bg-opacity-10 text-warning p-3 rounded-circle me-3 fs-3">
+                            <i class="bi bi-cpu"></i>
+                        </div>
+                        <h3 class="h4 mb-0 fw-bold">Data & Tools</h3>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="small fw-semibold">Machine Learning</span>
+                            <span class="small text-muted">70%</span>
+                        </div>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="mb-0">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="small fw-semibold">Git & GitHub</span>
+                            <span class="small text-muted">90%</span>
+                        </div>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
