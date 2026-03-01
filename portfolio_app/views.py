@@ -32,34 +32,34 @@ def blog_view(request):
     return render(request, 'blog.html', {'posts': posts})
 
 def contact_view(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
-            contact = form.save()
-            
-            # Send an email notification
-            subject = f"New Contact Portfolio Message from {contact.name}"
-            email_message = f"Name: {contact.name}\nEmail: {contact.email}\n\nMessage:\n{contact.message}"
-            try:
-                send_mail(
-                    subject,
-                    email_message,
-                    settings.DEFAULT_FROM_EMAIL,
-                    [settings.DEFAULT_FROM_EMAIL],
-                    fail_silently=False,
-                )
-            except Exception as e:
-                # Log or handle the exception if needed
-                print(f"Error sending email: {e}")
+            name = form.cleaned_data["name"]
+            email = form.cleaned_data["email"]
+            message = form.cleaned_data["message"]
 
-            messages.success(request, "Your message has been sent successfully! I will get back to you soon.")
-            return redirect('contact')
-        else:
-            messages.error(request, "Please correct the errors below.")
+            full_message = f"""
+            Name: {name}
+            Email: {email}
+
+            Message:
+            {message}
+            """
+
+            send_mail(
+                subject=f"Portfolio Contact from {name}",
+                message=full_message,
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=[settings.EMAIL_HOST_USER],
+                fail_silently=False,
+            )
+
+            return render(request, "contact.html", {"form": ContactForm(), "success": True})
     else:
         form = ContactForm()
-    
-    return render(request, 'contact.html', {'form': form})
+
+    return render(request, "contact.html", {"form": form})
 
 def custom_404(request, exception=None):
     return render(request, '404.html', status=404)
