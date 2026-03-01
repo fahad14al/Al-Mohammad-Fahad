@@ -11,14 +11,19 @@ def home_view(request):
 def projects_view(request):
     # Fetch GitHub repos
     github_url = "https://api.github.com/users/fahad14al/repos"
+    headers = {}
+    if hasattr(settings, 'GITHUB_TOKEN') and settings.GITHUB_TOKEN:
+        headers['Authorization'] = f"token {settings.GITHUB_TOKEN}"
+        
     try:
-        response = requests.get(github_url, timeout=5)
+        response = requests.get(github_url, headers=headers, timeout=5)
         response.raise_for_status()
         repos = response.json()
         
         # Sort by updated_at descending
         repos.sort(key=lambda x: x.get('updated_at', ''), reverse=True)
     except Exception as e:
+        print(f"Error fetching GitHub repos: {e}")
         repos = []
         messages.error(request, "Could not load projects from GitHub at this time.")
 
@@ -47,15 +52,21 @@ def contact_view(request):
             {message}
             """
 
-            send_mail(
-                subject=f"Portfolio Contact from {name}",
-                message=full_message,
-                from_email=settings.EMAIL_HOST_USER,
-                recipient_list=[settings.EMAIL_HOST_USER],
-                fail_silently=False,
-            )
-
-            return render(request, "contact.html", {"form": ContactForm(), "success": True})
+            try:
+                send_mail(
+                    subject=f"Portfolio Contact from {name}",
+                    message=full_message,
+                    from_email=settings.EMAIL_HOST_USER,
+                    recipient_list=[settings.EMAIL_HOST_USER],
+                    fail_silently=False,
+                )
+                messages.success(request, "Your message has been sent successfully!")
+                return redirect('contact')
+            except Exception as e:
+                print(f"Error sending email: {e}")
+                messages.error(request, "There was an error sending your message. Please try again later.")
+        else:
+            messages.error(request, "Please correct the errors in the form.")
     else:
         form = ContactForm()
 
