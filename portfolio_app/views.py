@@ -1,9 +1,7 @@
 import requests
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import ContactForm
 from .models import BlogPost
-from django.core.mail import send_mail
 from django.conf import settings
 def home_view(request):
     return render(request, 'home.html')
@@ -37,40 +35,7 @@ def blog_view(request):
     return render(request, 'blog.html', {'posts': posts})
 
 def contact_view(request):
-    if request.method == "POST":
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data["name"]
-            email = form.cleaned_data["email"]
-            message = form.cleaned_data["message"]
-
-            full_message = f"""
-            Name: {name}
-            Email: {email}
-
-            Message:
-            {message}
-            """
-
-            try:
-                send_mail(
-                    subject=f"Portfolio Contact from {name}",
-                    message=full_message,
-                    from_email=settings.EMAIL_HOST_USER,
-                    recipient_list=[settings.EMAIL_HOST_USER],
-                    fail_silently=False,
-                )
-                messages.success(request, "Your message has been sent successfully!")
-                return redirect('contact')
-            except Exception as e:
-                print(f"Error sending email: {e}")
-                messages.error(request, "There was an error sending your message. Please try again later.")
-        else:
-            messages.error(request, "Please correct the errors in the form.")
-    else:
-        form = ContactForm()
-
-    return render(request, "contact.html", {"form": form})
+    return render(request, "contact.html")
 
 def custom_404(request, exception=None):
     return render(request, '404.html', status=404)
